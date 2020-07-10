@@ -7,6 +7,26 @@ let resetbtn = document.querySelector(".resetbtn");
 solvebtn.addEventListener("click", getBoardValues);
 resetbtn.addEventListener("click", resetBoard);
 
+function isValid() {
+    for (let row =0; row <9; row++) {
+        for (let col=0; col<9; col++) {
+            let k = grid[row][col];
+            let occur = 0;
+            for (let i= 0; i<9; i++) {
+                let m = 3 * Math.floor(row/3) + Math.floor(i/3)
+                let n = 3 * Math.floor(col/3) + i%3
+                if (grid[row][i] === k) if (k!=0) occur ++;
+                 if (grid[i][col] === k) if (k!=0) occur ++;
+                 if (grid[m][n] === k) if (k!=0) occur ++;
+            }
+            if (occur > 3) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 function possible(row, col, k) {
     for (let i= 0; i<9; i++) {
         let m = 3 * Math.floor(row/3) + Math.floor(i/3)
@@ -40,6 +60,7 @@ function solve() {
 }
 
 function getBoardValues() {
+    console.log(grid);
     let allitems = [];
     board.forEach((item) =>  {
         allitems.push(item.value);
@@ -61,8 +82,14 @@ function fillGrid(items) {
                 index++;
             }
         }
-    solve();
-    printBoard();
+    if (!isValid()) {
+        alert("Board is not valid");
+        resetBoard();
+    } else {
+        solve();
+        printBoard();
+    }
+    
 }
 
 function printBoard() {
