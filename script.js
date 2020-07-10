@@ -1,5 +1,11 @@
 console.log("recursività")
 let grid =Array(9).fill().map(()=> Array(9).fill(0))  
+let board = document.querySelectorAll("input");
+let solvebtn = document.querySelector(".solvebtn");
+let resetbtn = document.querySelector(".resetbtn");
+
+solvebtn.addEventListener("click", getBoardValues);
+resetbtn.addEventListener("click", resetBoard);
 
 function possible(row, col, k) {
     for (let i= 0; i<9; i++) {
@@ -33,18 +39,12 @@ function solve() {
     return true;
 }
 
-//solve();
-//console.log(grid);
-
-let solvebtn = document.querySelector(".solvebtn");
-solvebtn.addEventListener("click", getBoardValues);
-
-let board = document.querySelectorAll("input");
-
-
 function getBoardValues() {
     let allitems = [];
-    board.forEach((item) =>  allitems.push(item.value));
+    board.forEach((item) =>  {
+        allitems.push(item.value);
+        item.disabled = true;
+    });
     fillGrid(allitems);
 }
 
@@ -73,4 +73,15 @@ function printBoard() {
             index++;
         }
     }
+}
+function resetBoard() {
+    let index = 0;
+    for (let i=0; i<9; i++) {
+        for (let j=0; j<9; j++) {
+            board[index].value = "";
+            grid[i][j] = 0;
+            index++;
+        }
+    }
+    document.querySelectorAll("input").forEach((item) => item.disabled = false);
 }
