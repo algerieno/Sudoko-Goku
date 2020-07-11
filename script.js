@@ -65,6 +65,7 @@ function getBoardValues() {
     board.forEach((item) =>  {
         allitems.push(item.value);
         item.disabled = true;
+        item.className = "disabled"
     });
     fillGrid(allitems);
 }
@@ -110,5 +111,8 @@ function resetBoard() {
             index++;
         }
     }
-    document.querySelectorAll("input").forEach((item) => item.disabled = false);
+    document.querySelectorAll("input").forEach((item) => {
+        item.disabled = false
+        item.className = ""
+    });
 }
