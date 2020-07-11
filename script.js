@@ -95,6 +95,8 @@ function fillGrid(items) {
 
 function printBoard() {
     let index = 0;
+    solvebtn.className = "disabledbtn"
+    solvebtn.disabled = true
     for (let i=0; i<9; i++) {
         for (let j=0; j<9; j++) {
             board[index].value = grid[i][j];
@@ -104,6 +106,8 @@ function printBoard() {
 }
 function resetBoard() {
     let index = 0;
+    solvebtn.className = "solvebtn"
+    solvebtn.disabled = false
     for (let i=0; i<9; i++) {
         for (let j=0; j<9; j++) {
             board[index].value = "";

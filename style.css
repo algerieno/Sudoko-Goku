@@ -62,15 +62,18 @@ table {
     outline: none;
 }
 
-.action_bar button:first-child {
+.solvebtn {
     background-color: teal;
 }
-.action_bar button:first-child:hover {
+.solvebtn:hover {
     background-color: green;
 }
-.action_bar button:last-child {
+.resetbtn {
     background-color: crimson;
 }
-.action_bar button:last-child:hover {
+.resetbtn:hover {
     background-color: red;
+}
+.disabledbtn {
+    background-color: #555;
 }
