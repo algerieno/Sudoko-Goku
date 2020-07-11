@@ -25,7 +25,9 @@ function playInput(input, index) {
         })
     } else {
         console.log("nah bruh")
-        board.forEach((input) => input.classList.toggle("wrongInput"))
+        board.forEach((input) => {
+            if (!input.className.includes("wrongInput")) input.classList.toggle("wrongInput")
+        })
     }
 }
 
