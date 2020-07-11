@@ -77,3 +77,9 @@ table {
 .disabledbtn {
     background-color: #555;
 }
+.selectedInput {
+    background-color: skyblue;
+}
+.wrongInput {
+    background-color: tomato;
+}

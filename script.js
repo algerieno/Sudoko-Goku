@@ -7,6 +7,36 @@ let resetbtn = document.querySelector(".resetbtn");
 solvebtn.addEventListener("click", getBoardValues);
 resetbtn.addEventListener("click", resetBoard);
 
+board.forEach((input, index) => input.addEventListener("input", () => playInput(input, index)))
+board.forEach((input) => input.addEventListener("focus", () => input.classList.toggle("selectedInput")))
+board.forEach((input) => input.addEventListener("focusout", () => input.classList.toggle("selectedInput")))
+
+
+
+function playInput(input, index) {
+    let i = Math.floor(index/9);
+    let j = index % 9;
+    grid[i][j] = input.value;
+    //console.log(`i= ${i}, j= ${j}, input= ${input}`)
+    if (isValid()) {
+        console.log("allgood")
+        board.forEach((input) => {
+            if (input.className.includes("wrongInput")) input.classList.toggle("wrongInput")
+        })
+    } else {
+        console.log("nah bruh")
+        board.forEach((input) => input.classList.toggle("wrongInput"))
+    }
+}
+
+
+function disableBoard() {
+    board.forEach((input) => {
+        input.disabled = true;
+        input.className = "disabled"
+    })
+}
+
 function isValid() {
     for (let row =0; row <9; row++) {
         for (let col=0; col<9; col++) {
@@ -64,8 +94,6 @@ function getBoardValues() {
     let allitems = [];
     board.forEach((item) =>  {
         allitems.push(item.value);
-        item.disabled = true;
-        item.className = "disabled"
     });
     fillGrid(allitems);
 }
@@ -85,8 +113,9 @@ function fillGrid(items) {
         }
     if (!isValid()) {
         alert("Board is not valid");
-        resetBoard();
+        //resetBoard();
     } else {
+        disableBoard();
         solve();
         printBoard();
     }
